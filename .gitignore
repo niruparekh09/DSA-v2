@@ -1,0 +1,22 @@
+# Ignore compiled class files
+/out/production/**/*.class
+
+# IntelliJ specific files
+.idea/
+*.iml
+*.iws
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Build output
+/out/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
