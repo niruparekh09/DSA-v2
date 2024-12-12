@@ -41,7 +41,7 @@ public class Pascal_Triangle {
 
     public static List<List<Integer>> generate(int numRows) {
         List<List<Integer>> pascalTriangle = new ArrayList<>();
-        for (int i = 1; i <=numRows ; i++) {
+        for (int i = 1; i <= numRows; i++) {
             pascalTriangle.add(getRow(i));
         }
         return pascalTriangle;
