@@ -1,11 +1,11 @@
 public class Get_Days_To_Make_Bouquets {
     public static void main(String[] args) {
-        System.out.println(minDays(new int[]{7,7,7,7,12,7,7}, 2, 3));
+        System.out.println(minDays(new int[]{7, 7, 7, 7, 12, 7, 7}, 2, 3));
     }
 
     public static int minDays(int[] bloomDay, int m, int k) {
-        if ((long)bloomDay.length < ((long) m * k)) return -1; // Converting to long to avoid overflow
-        
+        if ((long) bloomDay.length < ((long) m * k)) return -1; // Converting to long to avoid overflow
+
         int ans = getMiniOrMaxi(bloomDay, false);
         int low = getMiniOrMaxi(bloomDay, true), high = getMiniOrMaxi(bloomDay, false);
         while (low <= high) {
