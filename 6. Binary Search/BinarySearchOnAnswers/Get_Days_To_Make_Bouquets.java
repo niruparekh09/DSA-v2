@@ -6,6 +6,7 @@ public class Get_Days_To_Make_Bouquets {
     public static int minDays(int[] bloomDay, int m, int k) {
         if ((long) bloomDay.length < ((long) m * k)) return -1; // Converting to long to avoid overflow
 
+
         int ans = getMiniOrMaxi(bloomDay, false);
         int low = getMiniOrMaxi(bloomDay, true), high = getMiniOrMaxi(bloomDay, false);
         while (low <= high) {
