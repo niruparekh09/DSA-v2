@@ -1,9 +1,9 @@
-public class SearchInMatrix {
+public class SearchInMatrixOne {
     public static void main(String[] args) {
         System.out.println(searchMatrixOptimal(new int[][]{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}, 3));
     }
 
-    // Better
+    // Better [O(nlog(m))]
     public static boolean searchMatrix(int[][] matrix, int target) {
         int row = matrix.length;
         int col = matrix[0].length;
@@ -26,7 +26,7 @@ public class SearchInMatrix {
         return false;
     }
 
-    // Optimized Solution
+    // Optimized [O(log(n*m))]
     public static boolean searchMatrixOptimal(int[][] matrix, int target) {
         int n = matrix.length;
         int m = matrix[0].length;
