@@ -2,7 +2,7 @@ package Basics;
 
 import java.util.Arrays;
 
-public class ReversingArray {
+public class Reversing_Array {
 
     public static void swap(int[] arr, int s, int e) {
         int temp = arr[s];

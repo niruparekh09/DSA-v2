@@ -2,7 +2,7 @@ package Basics;
 
 import java.util.Scanner;
 
-public class SumOfFirstNNum {
+public class Sum_Of_First_N_Num {
     public static void main(String[] args) {
         int sum = 0;
         Scanner s = new Scanner(System.in);
