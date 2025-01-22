@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class FindPeakInMatrix {
+public class Find_Peak_In_Matrix {
     public static void main(String[] args) {
         //mat = [[25,37,23,37,19],[45,19,2,43,26],[18,1,37,44,50]]
         System.out.println(Arrays.toString(findPeakGrid(new int[][]{{25, 37, 23, 37, 19}, {45, 19, 2, 43, 26}, {18, 1, 37, 44, 50}})));
@@ -9,7 +9,7 @@ public class FindPeakInMatrix {
 
     public static int[] findPeakGrid(int[][] mat) {
         int m = mat[0].length; // Finding length of a row (i.e. number of cols)
-        int low = 0, high = m-1;
+        int low = 0, high = m - 1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             int row = getMaxElRow(mat, mid);

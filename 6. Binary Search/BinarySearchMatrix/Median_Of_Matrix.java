@@ -1,4 +1,4 @@
-public class MedianOfMatrix {
+public class Median_Of_Matrix {
     public static void main(String[] args) {
         //[[1, 3, 5], [2, 6, 9], [3, 6, 9]]
         System.out.println(median(new int[][]{{1, 3, 5}, {2, 6, 9}, {3, 6, 9}}));

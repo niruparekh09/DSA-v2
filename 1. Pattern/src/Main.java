@@ -2,6 +2,7 @@ public class Main {
     public static void main(String[] args) {
         pattern20(5);
     }
+
     //https://www.naukri.com/code360/problems/n-forest_6570177
     public static void pattern1(int n) {
         for (int i = 0; i < n; i++) {
@@ -331,7 +332,7 @@ public class Main {
     public static void pattern21(int n) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if(i==0 || j==0 || i==n-1 || j==n-1){
+                if (i == 0 || j == 0 || i == n - 1 || j == n - 1) {
                     System.out.print("*");
                 } else {
                     System.out.print(" ");

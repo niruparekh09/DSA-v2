@@ -1,4 +1,4 @@
-public class SearchInMatrixTwo {
+public class Search_In_Matrix_Two {
     public static void main(String[] args) {
         System.out.println(
                 searchMatrixOptimal(new int[][]{

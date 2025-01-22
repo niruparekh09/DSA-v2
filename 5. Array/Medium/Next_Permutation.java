@@ -5,6 +5,6 @@ public class Next_Permutation {
     }
 
     public static void nextPermutation(int[] arr, int n) {
-        
+
     }
 }

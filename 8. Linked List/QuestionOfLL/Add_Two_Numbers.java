@@ -1,5 +1,5 @@
 public class Add_Two_Numbers {
-    
+
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode t1 = l1;
         ListNode t2 = l2;
@@ -11,17 +11,17 @@ public class Add_Two_Numbers {
             if (t1 != null) sum += t1.val;
             if (t2 != null) sum += t2.val;
 
-            ListNode newNode = new ListNode(sum%10);
-            carry = sum/10;
+            ListNode newNode = new ListNode(sum % 10);
+            carry = sum / 10;
 
             curr.next = newNode;
             curr = curr.next;
 
-            if(t1 != null) t1 = t1.next;
-            if(t2 !=null) t2 = t2.next;
+            if (t1 != null) t1 = t1.next;
+            if (t2 != null) t2 = t2.next;
         }
 
-        if(carry !=0){
+        if (carry != 0) {
             curr.next = new ListNode(carry);
         }
         return dummyNode.next;
