@@ -1,5 +1,3 @@
-package QuestionsLL;
-
 public class Add_one_to_a_Linked_List_Number {
 
     public static Node addOneItr(Node head) {
