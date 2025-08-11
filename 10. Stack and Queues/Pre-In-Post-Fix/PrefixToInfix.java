@@ -14,7 +14,7 @@ public class PrefixToInfix {
             // If an operand than push to stack
             if (Character.isLetterOrDigit(c)) stack.push(Character.toString(c));
 
-            // If an operator than pop both operand, add the operator between them and push it to stack
+                // If an operator than pop both operand, add the operator between them and push it to stack
             else if (isOperator(c)) {
                 String op1 = stack.pop();
                 String op2 = stack.pop();

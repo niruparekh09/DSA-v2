@@ -48,7 +48,7 @@ public class LargestRectangleInHistogram {
     public static int largestRectangleAreaOptimal(int[] heights) {
         int ans = 0;
 
-        
+
         return ans;
     }
 }

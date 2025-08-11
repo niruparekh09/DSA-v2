@@ -1,11 +1,11 @@
 public class Odd_Even_LL {
 
     public static ListNode oddEvenList(ListNode head) {
-        if(head == null || head.next == null) return head;
+        if (head == null || head.next == null) return head;
         ListNode odd = head;
         ListNode even = head.next;
         ListNode evenHead = head.next; // First even elem
-        while(even != null && even.next != null){
+        while (even != null && even.next != null) {
             odd.next = odd.next.next; // Pointing to next even elem
             even.next = even.next.next; // Pointing to next odd elem
 

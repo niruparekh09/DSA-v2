@@ -15,15 +15,15 @@ public class Subsequences_Of_String {
     }
 
     public static void generateSubsequence(String str, int index, String current, ArrayList<String> res) {
-        if(index==str.length()){
+        if (index == str.length()) {
             res.add(current);
             return;
         }
 
         // To include all the character
-        generateSubsequence(str, index+1,current+str.charAt(index),res);
+        generateSubsequence(str, index + 1, current + str.charAt(index), res);
 
         // To exclude all the character
-        generateSubsequence(str, index+1,current,res);
+        generateSubsequence(str, index + 1, current, res);
     }
 }
