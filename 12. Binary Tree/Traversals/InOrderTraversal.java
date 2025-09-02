@@ -26,7 +26,18 @@ public class InOrderTraversal {
 
         Stack<TreeNode> st = new Stack<>();
 
-        while (st.isEmpty()) {
+        TreeNode node = root;
+
+        while (true) {
+            if (node != null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                if (st.isEmpty()) break;
+                TreeNode popped = st.pop();
+                ans.add(popped.data);
+                node = popped.right;
+            }
         }
         return ans;
     }
