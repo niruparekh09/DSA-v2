@@ -43,7 +43,7 @@ public class HeightOfTree {
         return level;
     }
 
-    static class TreeNode {
+    private class TreeNode {
         int data;
         TreeNode left;
         TreeNode right;

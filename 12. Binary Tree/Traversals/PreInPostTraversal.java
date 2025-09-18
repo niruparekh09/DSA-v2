@@ -38,7 +38,7 @@ public class PreInPostTraversal {
         return Arrays.asList(pre, in, post);
     }
 
-    static class TreeNode {
+    private class TreeNode {
         int data;
         TreeNode left;
         TreeNode right;
@@ -50,7 +50,7 @@ public class PreInPostTraversal {
         }
     }
 
-    class NodeState {
+    private class NodeState {
         TreeNode node;
         int state;
 

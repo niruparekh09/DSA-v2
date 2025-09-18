@@ -37,7 +37,7 @@ public class LevelOrderTraversal {
         return ans;
     }
 
-    static class TreeNode {
+    private class TreeNode {
         int data;
         TreeNode left;
         TreeNode right;

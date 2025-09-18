@@ -4,6 +4,9 @@ public class VerticalOrderTraversal {
 
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
+
+        if (root == null) return ans;
+
         Queue<Tuple> q = new LinkedList<>();
 
         // Map<Vertical,Map<Level,PQ<Node.Data>>> A vertical has many nodes at diff level and 2 nodes can
@@ -36,31 +39,19 @@ public class VerticalOrderTraversal {
         }
 
         // Taking out Map containing all nodes from Particular vertical. All nodes at particular x
-        for(TreeMap<Integer, PriorityQueue<Integer>> yMap : mpp.values()){
+        for (TreeMap<Integer, PriorityQueue<Integer>> yMap : mpp.values()) {
             List<Integer> xVals = new ArrayList<>();
 
             // All Nodes at particular x,y
             // Taking out all the nodes data present in a vertical, priority q might contain 2 nodes which overlap,
             // or else will normally have only 1 data for particular x,y
-            for(PriorityQueue<Integer> nodes : yMap.values()){
-                while(!nodes.isEmpty()) xVals.add(nodes.poll());
+            for (PriorityQueue<Integer> nodes : yMap.values()) {
+                while (!nodes.isEmpty()) xVals.add(nodes.poll());
             }
             ans.add(xVals);
         }
 
         return ans;
-    }
-
-    private class Tuple {
-        TreeNode node;
-        int vertical;
-        int level;
-
-        public Tuple(TreeNode node, int vertical, int level) {
-            this.node = node;
-            this.vertical = vertical;
-            this.level = level;
-        }
     }
 
     // Solution 2
@@ -99,6 +90,18 @@ public class VerticalOrderTraversal {
         nodes.add(new int[]{col, row, node.data});
         dfs(node.left, row + 1, col - 1, nodes);   // Left child
         dfs(node.right, row + 1, col + 1, nodes);  // Right child
+    }
+
+    private class Tuple {
+        TreeNode node;
+        int vertical;
+        int level;
+
+        public Tuple(TreeNode node, int vertical, int level) {
+            this.node = node;
+            this.vertical = vertical;
+            this.level = level;
+        }
     }
 
     private class TreeNode {
