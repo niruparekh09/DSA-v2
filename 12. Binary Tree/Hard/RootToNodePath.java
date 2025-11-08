@@ -3,30 +3,30 @@ import java.util.ArrayList;
 public class RootToNodePath {
 
     /**
-           1
-          / \
-         2   3
-          \   \
-           5   4
-
-     A = Add of 1
-     B = 5
-     Final path: [1,2,5] ✓
-
-     dfs(1, 5, [])
-     ├── ans.add(1) → [1]
-     ├── Check: 1 != 5
-     ├── Call dfs(2, 5, [1])
-     │   ├── ans.add(2) → [1,2]
-     │   ├── Check: 2 != 5
-     │   ├── Call dfs(null, 5, [1,2]) → returns false (left child is null)
-     │   ├── Call dfs(5, 5, [1,2])
-     │   │   ├── ans.add(5) → [1,2,5]
-     │   │   ├── Check: 5 == 5 → return true
-     │   │   └── (NO BACKTRACKING - found the node!)
-     │   └── Received true from right subtree → return true
-     └── Received true from left subtree → return true
-     Final path: [1,2,5] ✓
+     * 1
+     * / \
+     * 2   3
+     * \   \
+     * 5   4
+     * <p>
+     * A = Add. of 1
+     * B = 5
+     * Final path: [1,2,5] ✓
+     * <p>
+     * dfs(1, 5, [])
+     * ├── ans.add(1) → [1]
+     * ├── Check: 1 != 5
+     * ├── Call dfs(2, 5, [1])
+     * │   ├── ans.add(2) → [1,2]
+     * │   ├── Check: 2 != 5
+     * │   ├── Call dfs(null, 5, [1,2]) → returns false (left child is null)
+     * │   ├── Call dfs(5, 5, [1,2])
+     * │   │   ├── ans.add(5) → [1,2,5]
+     * │   │   ├── Check: 5 == 5 → return true
+     * │   │   └── (NO BACKTRACKING - found the node!)
+     * │   └── Received true from right subtree → return true
+     * └── Received true from left subtree → return true
+     * Final path: [1,2,5] ✓
      */
     public ArrayList<Integer> solve(TreeNode A, int B) {
         ArrayList<Integer> ans = new ArrayList<>();
