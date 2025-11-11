@@ -56,6 +56,10 @@ public class LCAInBinaryTree {
     }
 
     /*
+    * Intuition (for lcaBT()):
+      - Recursively search both subtrees — if a node matches p or q, return it upward.
+      - The first node where both left and right subtrees return non-null is the Lowest Common Ancestor.
+
             3
            / \
           5   1
