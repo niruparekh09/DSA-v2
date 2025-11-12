@@ -3,6 +3,7 @@ import java.util.List;
 
 public class InorderSuccessorAndPredecessorInBST {
 
+    // TC: O(H) + O(H) SC: O(1)
     List<Integer> succPredBST(TreeNode root, int key) {
         List<Integer> ans = new ArrayList<>(List.of(-1, -1));
         int succ = Integer.MAX_VALUE;
