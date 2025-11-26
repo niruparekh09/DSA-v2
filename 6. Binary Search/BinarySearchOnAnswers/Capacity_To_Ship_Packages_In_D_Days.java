@@ -1,43 +1,54 @@
-package BSOnAns;
-
 public class Capacity_To_Ship_Packages_In_D_Days {
     public static void main(String[] args) {
         System.out.println(shipWithinDays(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5));
-        /*
-        Output: 15
-        Explanation: A ship capacity of 15 is the minimum to ship all the packages in 5 days like this:
-        1st day: 1, 2, 3, 4, 5 {total: 15}
-        2nd day: 6, 7
-        3rd day: 8
-        4th day: 9
-        5th day: 10
-        */
     }
 
+    /*
+     * Approach: Binary Search on Answer (Minimization)
+     * Pattern: Modified Binary Search / Greedy
+     * Time Complexity: O(N * log(Sum - Max)) - Binary search over the capacity range, iterating array each time.
+     * Space Complexity: O(1) - Constant extra space.
+     */
     public static int shipWithinDays(int[] weights, int days) {
         int low = Integer.MIN_VALUE, high = 0;
+
+        // Step 1: Define Search Space
+        // Low: Heaviest single package (Ship must be at least this big to carry the largest item).
+        // High: Sum of all weights (Ship carries everything in 1 day).
         for (int weight : weights) {
             high += weight;
             low = Math.max(low, weight);
         }
+
+        // Step 2: Binary Search for minimum capacity
         while (low <= high) {
-            int mid = low + (high - low) / 2;
+            int mid = low + (high - low) / 2; // 'mid' is the test Capacity
             int daysReq = daysReq(weights, mid);
-            if (daysReq <= days) { // Checking if for loading less or equal days are required for a particular capacity
+
+            // Decision Logic:
+            // If calculated days <= target days, this capacity is VALID.
+            // However, we want the MINIMUM capacity, so we try to squeeze it smaller (eliminate right).
+            if (daysReq <= days) {
                 high = mid - 1;
-            } else {
+            }
+            // Logic: It takes too many days. Capacity is too small. Must increase.
+            else {
                 low = mid + 1;
             }
         }
+        // In minimization problems, 'low' converges to the optimal answer.
         return low;
     }
 
+    // Helper: Greedy simulation to count days needed for a specific ship capacity
     private static int daysReq(int[] weights, int capacity) {
         int days = 1, load = 0;
         for (int weight : weights) {
+            // If adding this package exceeds capacity, ship sails today.
+            // Package goes to the next day.
             if (load + weight > capacity) {
                 days = days + 1;
-                load = weight;
+                load = weight; // Reset load to current package weight
             } else {
                 load += weight;
             }

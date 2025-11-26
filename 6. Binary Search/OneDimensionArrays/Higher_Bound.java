@@ -5,18 +5,26 @@ public class Higher_Bound {
         System.out.println(hb);
     }
 
-    // smallest idx such that arr[idx] > x
-    // according to above e.g. the ans. will be 6 and 9 > 8 and idx = 6 [First occurrence of 9].
+    /*
+     * Approach: Upper Bound (Binary Search)
+     * Pattern: Modified Binary Search
+     * Time Complexity: O(log N) - Standard binary search traversal.
+     * Space Complexity: O(1) - Constant extra space.
+     */
     public static int findHB(int[] arr, int n, int x) {
+        // Default answer is 'n' (out of bounds) if no element is greater than x
         int ans = n;
         int low = 0, high = n - 1;
+
         while (low <= high) {
             int mid = (low + high) / 2;
+
+            // Key Logic: We look for the smallest index where arr[mid] > x (Strictly Greater).
             if (arr[mid] > x) {
-                ans = mid;
-                high = mid - 1;
+                ans = mid;      // Found a candidate
+                high = mid - 1; // Look Left to see if there's an earlier occurrence
             } else {
-                low = mid + 1;
+                low = mid + 1;  // Current element is <= x, need to look Right
             }
         }
         return ans;
