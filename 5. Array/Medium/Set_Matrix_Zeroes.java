@@ -1,5 +1,3 @@
-package Medium;
-
 import java.util.Arrays;
 
 public class Set_Matrix_Zeroes {

@@ -1,5 +1,3 @@
-package Medium;
-
 import java.util.Arrays;
 
 public class Rotate_Matrix_By_90_Degree {

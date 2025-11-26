@@ -1,5 +1,3 @@
-package Easy;
-
 import java.util.Arrays;
 
 public class Move_Zeroes_To_The_End {

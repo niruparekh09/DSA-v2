@@ -1,5 +1,3 @@
-package Hard;
-
 import java.util.*;
 
 public class Three_Sum {

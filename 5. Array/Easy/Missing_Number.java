@@ -1,5 +1,3 @@
-package Easy;
-
 import java.util.HashMap;
 
 public class Missing_Number {

@@ -1,5 +1,3 @@
-package Easy;
-
 import java.util.Arrays;
 
 public class Rotate_Array_By_K_Places {

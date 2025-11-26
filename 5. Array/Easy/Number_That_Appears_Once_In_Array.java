@@ -1,5 +1,3 @@
-package Easy;
-
 public class Number_That_Appears_Once_In_Array {
     public static void main(String[] args) {
         System.out.println(getNumber(new int[]{1, 1, 2, 2, 3, 4, 4}));

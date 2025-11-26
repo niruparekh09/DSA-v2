@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Majority_Element {
+public class Majority_Element_Med {
     public static void main(String[] args) {
         System.out.println(getMajorElementUsingMoores(new int[]{2, 2, 3, 3, 1, 2, 2}));
 

@@ -1,5 +1,3 @@
-package Easy;
-
 public class Second_Largest_Element {
     public static void main(String[] args) {
         System.out.println(getSecondLargest(new int[]{12, 35, 1, 10, 34, 1}));

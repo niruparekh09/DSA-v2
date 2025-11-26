@@ -1,5 +1,3 @@
-package Easy;
-
 import java.util.ArrayList;
 
 public class Intersection_Of_Two_Sorted_Arrays {
