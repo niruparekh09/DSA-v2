@@ -6,40 +6,36 @@ public class Longest_Sub_Array_with_Sum_K {
         System.out.println(lenOfLongestSubArray(new int[]{1, 2, 3, 1, 1, 1, 1, 4, 2, 3}, 3));
     }
 
-    // For Array with -ve nums , +ve nums and zeros
+    /*
+     * Approach: Hashing (Handles negatives and zeros)
+     * Pattern: Prefix Sum
+     * Time Complexity: O(N) - Single pass, map operations are amortized O(1).
+     * Space Complexity: O(N) - Worst case, we store all unique prefix sums.
+     */
     public static int lenOfLongestSubArrayOne(int[] a, int k) {
-        int n = a.length; // size of the array.
-
+        int n = a.length;
         Map<Long, Integer> preSumMap = new HashMap<>();
         long sum = 0;
         int maxLen = 0;
+
         for (int i = 0; i < n; i++) {
-            // calculate the prefix sum till index i:
             sum += a[i];
 
-            // if the sum = k, update the maxLen:
-            // This will work for initial value only for our example. I.e. sum = k will be in second
-            // index itself. Then from there on the sum will increase, and we will check for sum using
-            // prefix sum methodology i.e. x-k
+            // Case 1: The subarray starts from index 0 and sums to K
             if (sum == k) {
                 maxLen = Math.max(maxLen, i + 1);
             }
 
-            // calculate the sum of remaining part i.e. x-k:
+            // Case 2: Check if a prefix sum exists such that (CurrentSum - OldSum = K)
             long rem = sum - k;
-
-            // Calculate the length and update maxLen:
-            // If Sum = 9, rem = 6 and i = 5 for [9,5]; we will get [6,2] for .get(rem).
-            // So 9-6 = 3 i.e. k and length = 5-2 i.e. 3.
             if (preSumMap.containsKey(rem)) {
                 int len = i - preSumMap.get(rem);
                 maxLen = Math.max(maxLen, len);
             }
 
-            // Finally, update the map checking the conditions:
-            // If the Map doesn't have the sum previously stored than we will add it accordingly
-            // This will add all the key value pair. Until and unless there are zeros present in array
-            // in which case the sum will not increase and will be present in the map.
+            // Key Logic: Only add 'sum' to map if it doesn't exist.
+            // Why? To keep the index of the *first* occurrence (leftmost) to maximize subarray length.
+            // This also handles cases with 0s effectively.
             if (!preSumMap.containsKey(sum)) {
                 preSumMap.put(sum, i);
             }
@@ -48,19 +44,32 @@ public class Longest_Sub_Array_with_Sum_K {
         return maxLen;
     }
 
+    /*
+     * Approach: Greedy Two Pointers (Optimal for Positives ONLY)
+     * Pattern: Sliding Window
+     * Time Complexity: O(N) - The 'left' and 'right' pointers move forward at most N times each (2N).
+     * Space Complexity: O(1) - No extra data structures.
+     */
     public static int lenOfLongestSubArray(int[] a, int k) {
         int sum = a[0];
         int maxLen = 0;
         int left = 0, right = 0;
         int n = a.length;
+
         while (right < n) {
+            // Key Logic: Shrink window from the left if sum exceeds K.
+            // Note: This logic FAILS with negative numbers (monotonicity assumption).
             while (left <= right && sum > k) {
                 sum -= a[left];
                 left++;
             }
+
+            // Check if current window matches target
             if (sum == k) {
                 maxLen = Math.max(maxLen, right - left + 1);
             }
+
+            // Expand window to the right
             right++;
             if (right < n) sum += a[right];
         }

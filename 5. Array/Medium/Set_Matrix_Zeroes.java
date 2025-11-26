@@ -7,11 +7,19 @@ public class Set_Matrix_Zeroes {
         System.out.println(Arrays.deepToString(matrix));
     }
 
+    /*
+     * Approach: Marker Arrays (Better)
+     * Pattern: Matrix Traversal / Hashing (Boolean mapping)
+     * Time Complexity: O(N * M) - Two passes through the matrix.
+     * Space Complexity: O(N + M) - Uses separate arrays to store row/col states.
+     */
     private static void setZeroes(int[][] matrix) {
         int n = matrix.length;
         int m = matrix[0].length;
         int[] col = new int[m];
         int[] row = new int[n];
+
+        // Pass 1: Mark rows and columns that contain at least one zero
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (matrix[i][j] == 0) {
@@ -21,6 +29,7 @@ public class Set_Matrix_Zeroes {
             }
         }
 
+        // Pass 2: Update matrix based on markers
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (row[i] == 1 || col[j] == 1) {
@@ -30,42 +39,53 @@ public class Set_Matrix_Zeroes {
         }
     }
 
+    /*
+     * Approach: In-Place (Using first Row/Col as markers)
+     * Pattern: Matrix Traversal / Space Optimization
+     * Time Complexity: O(N * M) - Linear traversal.
+     * Space Complexity: O(1) - No extra space; we use the matrix itself.
+     */
     private static void setZeroesOptimal(int[][] matrix) {
-        int col0 = 1; // To check for if 0th column will be zero or not. Because matrix[0][0] will be occupied for row
+        int col0 = 1; // Separate flag for the 0th column, as matrix[0][0] overlaps with Row 0.
         int n = matrix.length;
         int m = matrix[0].length;
+
+        // Step 1: Traverse and mark the first row/col based on internal values
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (matrix[i][j] == 0) {
-                    // Marking ith row for zero
+                    // Mark the i-th row (stored in first column)
                     matrix[i][0] = 0;
 
-                    // Marking jth row for zero
-                    if (j != 0)
-                        matrix[0][j] = 0;
+                    // Mark the j-th column (stored in first row)
+                    if (j != 0) matrix[0][j] = 0;
                     else
-                        // matrix[0][0] is occupied that's why assigning col0 the value if jth(0th) col is 0.
+                        // Handle collision: If it's the 0th column, use the separate col0 variable
                         col0 = 0;
                 }
             }
         }
 
-        // Running loop for inner element only. Will convert the 0th row and col to 0 afterwards
+        // Step 2: Process the inner sub-matrix (1,1) to (N,M)
+        // Key Logic: We iterate skipping the first row/col to avoid corrupting our "flags" before we read them.
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < m; j++) {
+                // Check markers in first row/col
                 if (matrix[0][j] == 0 || matrix[i][0] == 0) {
                     matrix[i][j] = 0;
                 }
             }
         }
 
-        // Checking if 0th col will be zero
+        // Step 3: Handle the 0th Row
+        // Logic: matrix[0][0] stores the status for the entire first row
         if (matrix[0][0] == 0) {
             for (int j = 0; j < m; j++)
                 matrix[0][j] = 0;
         }
 
-        // Checking if 0th row will be zero
+        // Step 4: Handle the 0th Column
+        // Logic: col0 stores the status for the entire first column
         if (col0 == 0) {
             for (int i = 0; i < n; i++) {
                 matrix[i][0] = 0;
