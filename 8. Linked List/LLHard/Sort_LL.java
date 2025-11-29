@@ -1,58 +1,68 @@
 public class Sort_LL {
 
+    /*
+     * Approach: Merge Sort
+     * Pattern: Divide & Conquer / Recursion
+     * Time Complexity: O(N log N) - List is split log N times, and merging takes linear time.
+     * Space Complexity: O(log N) - Recursion stack space.
+     */
     public static ListNode sortList(ListNode head) {
-        // Base case: If the list is empty or has only one node, it's already sorted.
+        // Base case: A list with 0 or 1 node is already sorted.
         if (head == null || head.next == null) return head;
 
-        // Find the middle node to split the list into two halves.
+        // Step 1: Find the middle to divide the list into two halves.
         ListNode middle = findMiddle(head);
 
-        // Split the list into left and right halves.
-        ListNode leftHead = head, rightHead = middle.next;
-        middle.next = null; // Break the list into two parts.
+        // Step 2: Split the list physically.
+        ListNode leftHead = head;
+        ListNode rightHead = middle.next;
+        middle.next = null; // Critical: Break the link to separate the two lists.
 
-        // Recursively sort both halves.
+        // Step 3: Recursive calls to sort both halves.
         leftHead = sortList(leftHead);
         rightHead = sortList(rightHead);
 
-        // Merge the sorted halves and return the result.
+        // Step 4: Merge the sorted halves.
         return mergeList(leftHead, rightHead);
     }
 
+    // Helper: Standard Two-Pointer Merge Logic
     private static ListNode mergeList(ListNode leftHead, ListNode rightHead) {
-        // Dummy node to act as the starting point for the merged list.
         ListNode dummyNode = new ListNode(-1);
         ListNode t1 = leftHead, t2 = rightHead;
-        ListNode res = dummyNode; // Pointer for constructing the merged list.
+        ListNode res = dummyNode;
 
-        // Merge the two lists by comparing node values.
         while (t1 != null && t2 != null) {
             if (t1.val < t2.val) {
-                res.next = t1; // Add the smaller node to the result.
+                res.next = t1;
                 res = t1;
                 t1 = t1.next;
             } else {
-                res.next = t2; // Add the smaller node to the result.
+                res.next = t2;
                 res = t2;
                 t2 = t2.next;
             }
         }
 
-        // Append any remaining nodes from either list.
+        // Append remaining nodes (no loop needed as they are already sorted)
         if (t1 != null) res.next = t1;
         else res.next = t2;
 
-        return dummyNode.next; // Return the head of the merged list.
+        return dummyNode.next;
     }
 
+    // Helper: Fast & Slow Pointers to find the "Left Middle"
     private static ListNode findMiddle(ListNode head) {
-        // Use two pointers (slow and fast) to find the middle of the list.
         ListNode slow = head, fast = head;
+
+        // Logic: The condition (fast.next.next != null) ensures that for Even length lists,
+        // 'slow' stops at the 1st middle node (e.g., 1->2->3->4, stops at 2).
+        // This is required so we can split as [1,2] and [3,4].
         while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;      // Move slow pointer one step.
-            fast = fast.next.next; // Move fast pointer two steps.
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return slow; // Slow pointer will point to the middle node.
+        return slow;
     }
 
     public static class ListNode {
