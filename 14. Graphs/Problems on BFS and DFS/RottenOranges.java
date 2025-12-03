@@ -12,8 +12,12 @@ public class RottenOranges {
         }));
     }
 
-    // TC: O(n*m) [Initialization] + O(4*n*m) [BFS in all 4 direcn for all oranges if all are rotten]
-    // SC: O(n*m) for vis[][]
+    /*
+     * Approach: Multi-Source BFS (Level-order Traversal)
+     * Pattern: Matrix BFS
+     * Time Complexity: O(N * M) - Each cell is visited at most once.
+     * Space Complexity: O(N * M) - For Queue and Visited array.
+     */
     public int orangesRotting(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
@@ -98,8 +102,11 @@ public class RottenOranges {
         return maxTime;
     }
 
-    // TC: O(n*m) + O(4*n*m)
-    // SC: O(1) As we are directly modifying the grid[][]
+    /*
+     * Approach: Space Optimized BFS
+     * Logic: Same as above, but modifies the input 'grid' directly instead of using 'vis' array.
+     * Space Complexity: O(1) auxiliary (excluding Queue).
+     */
     public int orangesRotting2(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;

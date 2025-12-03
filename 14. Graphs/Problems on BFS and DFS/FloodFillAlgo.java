@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class FloodFillAlgo {
-    // delta row and col to traverse to neighbors
+    // Delta row and col to traverse neighbor pixels (Up, Right, Down, Left)
     private int[] dRow = {-1, 0, 1, 0};
     private int[] dCol = {0, 1, 0, -1};
 
@@ -17,48 +17,55 @@ public class FloodFillAlgo {
     /* Helper Function to check if a pixel is within boundaries */
     private boolean isValid(int i, int j,
                             int n, int m) {
-
-        // Return false if pixel is invalid
         if (i < 0 || i >= n) return false;
         if (j < 0 || j >= m) return false;
-
-        // Return true if pixel is valid
         return true;
     }
 
+    /*
+     * Approach: DFS (Recursion)
+     * Pattern: Matrix Traversal / Flood Fill
+     * Time Complexity: O(N * M) - In worst case, we change color of all pixels.
+     * Space Complexity: O(N * M) - Recursion stack + Answer Matrix.
+     */
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         int n = image.length;
         int m = image[0].length;
+
+        // Create a separate result matrix to preserve the original input
         int[][] ans = new int[n][m];
 
-        int iniCol = image[sr][sc]; // To keep the track of the init color.
+        int iniCol = image[sr][sc]; // The target color we are replacing
 
-        // Copying the complete image mat to ans.
+        // Copy the complete image data to ans matrix
         for (int i = 0; i < image.length; i++) {
             ans[i] = Arrays.copyOf(image[i], image[i].length);
         }
 
+        // Edge Case: If new color is same as old color, no changes needed (prevents infinite recursion)
+        // Logic handled implicitly by 'ans[i][j] != newColor' check in DFS below,
+        // or could return 'ans' immediately here.
         dfs(sr, sc, iniCol, image, ans, color);
 
         return ans;
     }
 
     private void dfs(int row, int col, int iniCol, int[][] image, int[][] ans, int newColor) {
-        // Color the current node with new color
+        // Apply the new color
         ans[row][col] = newColor;
 
-        // Getting the dimensions of image
         int n = image.length;
         int m = image[0].length;
 
-        // Traverse to 4 neighbours of the current node
+        // Traverse all 4 neighbors
         for (int k = 0; k < 4; k++) {
             int i = row + dRow[k];
             int j = col + dCol[k];
 
-            // Check if the node coordinates are in boundary
-            // Check if the node is equal to iniCol of starting node
-            // Check if the node is not already visited (already has newCol)
+            // Validation Logic:
+            // 1. Within bounds
+            // 2. Pixel matches the Original Color (part of the connected component)
+            // 3. Pixel hasn't been colored yet (Avoids infinite loops if newColor != iniCol)
             if (isValid(i, j, n, m) && image[i][j] == iniCol && ans[i][j] != newColor) {
                 dfs(i, j, iniCol, image, ans, newColor);
             }
