@@ -1,4 +1,4 @@
-public class Stack {
+public class StackUsingImpl {
     public static void main(String[] args) {
         StackImpl st = new StackImpl();
 

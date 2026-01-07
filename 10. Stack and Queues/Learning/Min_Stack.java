@@ -6,16 +6,6 @@ public class Min_Stack {
     }
 }
 
-class Pair {
-    int val;
-    int min;
-
-    public Pair(int val, int min) {
-        this.val = val;
-        this.min = min;
-    }
-}
-
 class MinStack_1 {
 
     Stack<Pair> st;
@@ -42,6 +32,16 @@ class MinStack_1 {
 
     public int getMin() {
         return st.peek().min;
+    }
+
+    private class Pair {
+        int val;
+        int min;
+
+        public Pair(int val, int min) {
+            this.val = val;
+            this.min = min;
+        }
     }
 }
 

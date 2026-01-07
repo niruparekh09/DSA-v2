@@ -1,4 +1,4 @@
-public class Queue {
+public class QueueUsingImpl {
     public static void main(String[] args) {
         QueueImpl q = new QueueImpl();
         q.push(5);

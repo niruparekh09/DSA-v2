@@ -7,31 +7,43 @@ public class Quick_Sort {
         System.out.println("Sorted Array: " + Arrays.toString(arr));
     }
 
+    /*
+     * Approach: Quick Sort
+     * Pattern: Divide and Conquer / Sorting
+     * Time Complexity: O(N log N) Average, O(N^2) Worst Case (already sorted).
+     * Space Complexity: O(log N) - Recursion stack space (O(N) worst case).
+     */
     private static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {   // For more than one element only
+        // Base Case: Only sort if the range has more than one element
+        if (low < high) {
+            // Partition array and get the pivot's correct sorted position
             int partitionIndex = partition(arr, low, high);
+
+            // Recursively sort elements before and after partition
             quickSort(arr, low, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, high);
         }
     }
 
+    // Partition Logic (Hoare's Scheme Variation)
+    // Goal: Place 'pivot' at correct position such that left < pivot and right > pivot
     private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[low]; // Taking first element as the pivot
+        int pivot = arr[low]; // Choosing the first element as pivot
         int i = low;
         int j = high;
+
         while (i < j) {
-            // We are shifting i towards right till we don't find the element greater than pivot
+            // Find first element from Left that is greater than pivot
             while (arr[i] <= pivot && i <= high - 1) {
                 i++;
             }
 
-            // We are shifting j towards left will we don't find the element lesser than pivot
+            // Find first element from Right that is smaller than pivot
             while (arr[j] > pivot && j >= low + 1) {
                 j--;
             }
 
-            // Once we find out the i and j, we will swap them. Idea is to keep smaller elements to right
-            // of pivot and larger elements to left of the pivot.
+            // Swap them to maintain partition property (Small on left, Large on right)
             if (i < j) {
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -39,13 +51,12 @@ public class Quick_Sort {
             }
         }
 
-        // Once while loop has ended then 'j' would've exceeded i. So now we will swap the last element j
-        // to pivot element so that it is center.
+        // Final Step: Place the pivot in its correct sorted position (index j).
+        // Since j stopped at an element smaller than pivot, we swap pivot (arr[low]) with arr[j].
         int temp = arr[low];
         arr[low] = arr[j];
         arr[j] = temp;
 
-        // We will return the pivot element's new index i.e. the partition index
-        return j;
+        return j; // Return the partition index
     }
 }
