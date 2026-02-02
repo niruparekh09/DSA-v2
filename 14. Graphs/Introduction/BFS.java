@@ -1,14 +1,17 @@
 import java.util.*;
 
 class BFS {
+
     public static void main(String[] args) {
         int V = 5;
         List<List<Integer>> adj = new ArrayList<>();
+
+        // Initialize adjacency list
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
 
-        // build the graph (adjacency lists)
+        // Build the graph (Undirected Graph)
         adj.get(0).addAll(Arrays.asList(2, 3, 1));
         adj.get(1).add(0);
         adj.get(2).addAll(Arrays.asList(0, 4));
@@ -18,40 +21,63 @@ class BFS {
         BFS bfs = new BFS();
         List<Integer> bfsOfGraph = bfs.bfsOfGraph(V, adj);
 
+        // Output BFS traversal
         System.out.println("BFS of Graph: " + bfsOfGraph);
         // Expected output: BFS of Graph: [0, 2, 3, 1, 4]
     }
 
+    /*
+     * Approach: Breadth First Search (BFS)
+     * Pattern: Graph Traversal (Level Order using Queue)
+     * Time Complexity: O(V + E) - Each vertex and edge is processed once.
+     * Space Complexity: O(V) - Visited array + Queue.
+     */
     // Return BFS traversal for all nodes (handles disconnected graphs)
     public List<Integer> bfsOfGraph(int V, List<List<Integer>> adj) {
-        List<Integer> bfs = new ArrayList<>();
-        boolean[] visited = new boolean[V]; // mark nodes we've already enqueued/visited
 
-        // Ensure we cover every connected component
+        List<Integer> bfs = new ArrayList<>(); // Stores BFS traversal order
+        boolean[] visited = new boolean[V];    // Tracks visited nodes
+
+        /*
+         * In case the graph has multiple connected components,
+         * perform BFS starting from every unvisited vertex.
+         */
         for (int i = 0; i < V; i++) {
             if (!visited[i]) {
-                // BFS from node i will visit its entire component
-                bfs(i, adj, visited, bfs);
+                bfs(i, adj, visited, bfs); // BFS for the current component
             }
         }
+
         return bfs;
     }
 
-    // Standard BFS using a queue
-    private void bfs(int node, List<List<Integer>> adjList, boolean[] visited, List<Integer> ans) {
+    /*
+     * Helper Method: Standard BFS using Queue
+     * Traverses all nodes reachable from the given start node.
+     */
+    private void bfs(int node, List<List<Integer>> adjList,
+                     boolean[] visited, List<Integer> ans) {
+
         Queue<Integer> queue = new LinkedList<>();
 
-        queue.add(node);         // start from 'node'
-        visited[node] = true;    // mark as visited when enqueued (avoid duplicates)
+        // Start BFS from the given node
+        queue.add(node);
+        visited[node] = true; // Mark visited at enqueue time to avoid duplicates
 
         while (!queue.isEmpty()) {
-            int current = queue.poll(); // pop front
-            ans.add(current);           // process current node
 
-            // iterate over neighbors and enqueue unvisited ones
+            // Remove front element of queue
+            int current = queue.poll();
+
+            // Add node to BFS traversal result
+            ans.add(current);
+
+            // Traverse all adjacent (neighbor) nodes
             for (int neighbour : adjList.get(current)) {
+
+                // If neighbor is unvisited, mark and enqueue it
                 if (!visited[neighbour]) {
-                    visited[neighbour] = true; // mark immediately to avoid multi-enqueue
+                    visited[neighbour] = true;
                     queue.add(neighbour);
                 }
             }
