@@ -1,5 +1,3 @@
-package Subsequence;
-
 import java.util.ArrayList;
 
 public class Subsequences_Of_String {

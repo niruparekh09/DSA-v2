@@ -1,5 +1,3 @@
-package Subsequence;
-
 import java.util.ArrayList;
 
 public class Is_Subset_Present_With_Sum_K {
